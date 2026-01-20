@@ -1,0 +1,1080 @@
+.app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 95px;          /* movıhub cardının yüksekliği */
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+ justify-content: center; 
+  background: linear-gradient(135deg, #0f172a, #020617);
+  padding: 14px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.header-center {
+  display: flex;
+  align-items: center;
+  gap: 32px;                 /*  MovieHub ve  kullanıcı arası mesafe */
+}
+
+.app-logo {
+  text-decoration: none;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.app-logo:hover {
+  opacity: 0.9;
+}
+
+.app-title {
+	margin: 0; 
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  justify-self: center;
+  color: #f9fafb;
+  letter-spacing: 0.4px;
+}
+
+.app-user {
+ /* right: 24px;  sağa yapıştr */
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 14px;
+  color: #e5e7eb;
+}
+
+/* Görsel önizleme satırı  EDİTLE ALAKALI CSSLER */
+.image-preview-row {
+  display: flex;
+  gap: 32px;                 /* aralık biraz arttı */
+  align-items: flex-start;
+}
+
+.image-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160px;              /* ikisi aynı gnişlik */
+}
+
+/* Üst başlıklar */
+.image-title {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 6px;
+  text-align: center;
+  width: 100%;        
+  display: block;     /*  inline'dan block'a */
+}
+
+/* Tür başlığını section gibi göster */
+.form-label {
+  font-weight: 600;   
+}
+
+
+/* Switch genişliğini uzat */
+.form-switch .form-check-input {
+  width: 30px;        /*  enine uzatma */
+  height: 23x;       /* orantı */
+  cursor: pointer;
+}
+
+/* İçteki yuvarlak daha düzgün dursun */
+.form-switch .form-check-input::before {
+  width: 22px;
+  height: 22px;
+}
+
+
+/* Form alan başlıkları */
+.form-grid > div > label,
+.form-group > label {
+  font-weight: 600;  
+}
+
+
+.form-label:has(+ .row) {
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 4px;
+}
+
+/* Film Güncelle - Görsel (mevcut + önizleme) */
+.edit-movie-image {
+  max-width: 220px;     
+  width: 100%;
+  height: auto;
+
+  margin-top: 0;
+  margin-bottom: 10px;
+
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  background: #fff;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+}
+
+/* Hover efekti  */
+.edit-movie-image:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.25);
+}
+
+/* Film görseli satırı */
+.file-upload-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;             
+}
+
+/* Label dengeli boyut */
+.file-upload-row .form-label {
+  font-size: 16px;
+  white-space: nowrap;
+}
+
+/* Buton biraz daha kompakt */
+.file-upload-row .btn {
+  padding: 4px 12px;
+  font-size: 16px;
+}
+
+/* Başarı mesajı daha ince ve sade */
+.alert-success {
+  padding: 8px 14px;      /*  kalınlığı azalt */
+  font-size: 14px;        /* yazıyı biraz küçült */
+  border-radius: 8px;     /* daha modern */
+  line-height: 1.4;
+}
+.alert-success .btn-close {
+  transform: scale(0.85);
+}
+
+
+/* Çıkış butonu */
+.logout-btn {
+  background: #2563eb;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  transition: background 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #1d4ed8;
+}
+
+.app-subtitle {
+  font-size: 17px;
+  font-weight: 400;
+  margin-top: 2px;
+  color: #9ca3af;
+  letter-spacing: 0.3px;
+}
+@media (max-width: 640px) {
+  .app-header {
+    padding: 12px 16px;
+  }
+
+  .app-title {
+    font-size: 18px;
+  }
+
+  .app-user {
+    font-size: 12px;
+    gap: 8px;
+  }
+
+  .logout-btn {
+    padding: 4px 10px;
+    font-size: 12px;
+  }
+}
+
+
+.card {
+ background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+  padding: 20px;
+  margin-bottom: 24px;
+  
+   
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th, td {
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #f1f3f5;
+}
+.btn-search {
+    background: #0d6efd;
+}
+
+.btn-reset {
+    background: #6c757d;
+    text-decoration: none;
+}
+
+
+button, .btn {
+  border-radius: 6px;
+}
+
+input {
+  padding: 8px 10px;
+  border-radius: 6px;
+}
+
+.movie-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.movie-table th,
+.movie-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #dee2e6;
+  vertical-align: top;
+}
+
+.movie-table th {
+  background: #f1f3f5;
+  text-align: left;
+}
+
+.movie-table tr:hover {
+  background: #f8f9fa;
+}
+
+/* İşlem butonları */
+.btn-edit {
+  background: #ffc107;
+  color: #212529;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.btn-delete {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn-edit:hover,
+.btn-delete:hover {
+  opacity: 0.85;
+}
+
+/*
+   SECTION Header
+ */
+
+.section-header {
+  display: none;
+}
+
+
+/* Açık / Kapalı ok ikonu */
+.section-header::after {
+  content: "▼";
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.section-header.active::after {
+  transform: rotate(180deg);
+}
+
+/* Section içeriği */
+.section-content {
+  display: none;
+  margin-top: 10px;
+}
+
+/* 
+   Film Ara – Buton Hissi
+*/
+
+.search-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.search-actions button,
+.search-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/*  Ara butonu */
+.search-actions button {
+  background: #0d6efd;
+  color: white;
+  border: none;
+}
+
+.search-actions button:hover {
+  background: #0b5ed7;
+  transform: translateY(-1px);
+}
+
+.search-actions button:active {
+  transform: scale(0.96);
+}
+
+/*  Tümünü Göster */
+.search-actions a {
+  background: #e9ecef;
+  color: #212529;
+}
+
+.search-actions a:hover {
+  background: #dee2e6;
+  transform: translateY(-1px);
+}
+
+.search-actions a:active {
+  transform: scale(0.96);
+}
+
+.btn-edit,
+.btn-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;          /* aynı yükseklik */
+  min-width: 74px;
+  padding: 0 10px;       /* yatay boşluk */
+  font-size: 13px;
+  line-height: 1;
+}
+.btn-edit i,
+.btn-delete i {
+  margin-right: 4px;
+}
+/* 
+   Film Ekle – Form UI
+*/
+
+.form-group.small {
+  max-width: 180px;
+}
+.form-grid {
+  gap: 12px 10px; /* dikey / yatay */
+}
+.form-grid input[type="number"] {
+  max-width: 160px;   
+}
+
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+body label {
+  color: #e5e7eb;
+}
+.form-group input[type="text"],
+.form-group input[type="number"] {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  font-size: 14px;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 2px rgba(13,110,253,0.15);
+}
+
+
+.genre-list label {
+  font-size: 13px;
+  background: #f8f9fa;
+  padding: 6px 10px;
+  border-radius: 20px;
+  border: 1px solid #dee2e6;
+  cursor: pointer;
+}
+
+.genre-list input {
+  margin-right: 4px;
+}
+
+/*
+   Genre Pills (Film Ara) */
+
+.genre-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.genre-box input[type="checkbox"] {
+  display: none;
+}
+
+/* Tür butonları */
+.genre-pill {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.12); /* koyu arka plan */
+  color: #f8fafc;                     
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.25);
+  transition: all 0.2s ease;
+  user-select: none;
+}
+/* Hover */
+.genre-pill:hover {
+  background: rgba(255,255,255,0.22);
+}
+.genre-box input[type="checkbox"]:checked + .genre-pill {
+  background: #0d6efd;
+  color: white;
+  border-color: #0d6efd;
+}
+
+.genre-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 8px;
+  row-gap: 10px;
+}
+
+
+.genre-grid .form-check-label{
+	
+  color: #ffffff;    
+  font-size: 15px;     
+  font-weight: 300;   
+  margin-left: 3px;
+
+}
+
+.genre-grid .form-check-input{
+  margin-top: 2px;
+}
+
+/* Türler başlığı filekel  */
+.genre-title {
+	color: #ffffff;
+margin-bottom: 6px;
+  font-weight: 600;  
+}
+
+
+
+#otherGenreInput {
+  max-width: 185px;
+}
+
+
+
+/* Input & textarea */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #ced4da;
+  font-size: 14px;
+  resize: vertical;
+}
+
+/* Focus */
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 2px rgba(13,110,253,0.15);
+}
+.genre-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 4px;  /* labeller arası mesafe */
+  align-items: center; 
+}
+
+.form-group.full.submit-row {
+  display: flex;
+  justify-content: center; 
+  margin-top: 12px;
+}
+
+
+
+.btn-add {
+  width: auto;
+  min-width: 160px;
+  max-width: 200px;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  cursor: pointer;
+
+  background-color: #2563eb;
+  color: #fff;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-add:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+
+.btn-add:active {
+  transform: scale(0.97);
+}
+
+.form-group textarea {
+  max-width: 600px;   
+  width: 100%;
+}
+
+.form-group.small input {
+  max-width: 180px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* türleirn ayzısının boyutu */
+.genre-row label {
+  font-size: 15px;
+    color: #f9fafb;   
+  font-weight: 400;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-direction: row-reverse; 
+  white-space: nowrap;
+}
+  
+
+
+
+/* Tür checkbox grubu */
+.genre-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+/* diğer input ayarı */
+.custom-genre {
+  width: 240px;        
+  max-width: 240px;
+  height: 32px;      
+  font-size: 13px;
+  padding: 6px 10px;
+  margin-left: 8px;
+  margin-top: 4px;     
+  box-sizing: border-box;
+}
+
+ 
+
+/* İzledim satırı */
+.watched-row {
+  margin-top: 4px;   
+  display: flex;
+  margin-left: 0;          /* içerden başlamayı sıfırla */
+  padding-left: 0;
+  align-items: center;
+  gap: 10px;
+
+  grid-column: span 2;   
+  justify-self: start;   
+}
+.watched-row .form-check {
+  padding-left: 0;         /* Bootstrap default padding'i kapat */
+  margin-left: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* İzledim label , Puan gibi bold */
+.watched-row .form-check-label {
+ color: #ffffff;   
+  font-weight: 600;
+}
+
+.watched-row .form-check-input {
+  cursor: pointer;
+    margin-left: 0;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgb(192, 192, 192)}
+
+.rating-inline {
+   margin-left: 22px;        /* checkbox hizası */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+/* Film Ekle formu – kart + ortalama */
+.form-wrapper {
+  max-width: 900px;
+  margin: 16px auto;
+  padding: 28px 32px;   /* fim ekle booardı*/
+
+  background: linear-gradient(
+    135deg,
+    #1e293b,
+    #0f172a
+  );
+
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+}
+
+
+
+.film-ara-form {
+  max-width: 700px;        /* form genişliği */
+  margin: 0 auto;          /* tam ortala */
+  text-align: center;      /* içindeki yazıları ortalar */
+}
+
+.film-ara-form input[type="text"] {
+  width: 60%;
+  margin: 6px auto 12px auto;
+  display: block;
+}
+.film-ara-form .genre-box {
+  justify-content: center;
+}
+.search-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.action-select-box {
+  margin-top: 24px;  /* yapmak istediğin işlemi seç aşağıda */
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.action-select-box .btn {
+  font-weight: 600;
+  padding: 8px 18px;
+}
+
+.action-card {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  border-radius: 14px;
+  padding: 22px 28px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  text-align: center;
+    margin-top: 24px;
+
+  /* EKLE */
+  margin: 0 auto;
+  max-width: 520px;
+}
+
+.action-title {
+  font-size: 14px;
+  margin-bottom: 12px;
+  font-weight: 500;
+  color: #e5e7eb;; /* Lütfen yapmak siteiğin ayzı rengi */
+  text-align: center;
+}
+
+.action-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.action-row select {
+   background: #0f172a;
+  color: #e5e7eb;
+  border: 1px solid #334155;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+
+/* Select içindeki seçenekler */
+.action-row select option {
+  background: #0f172a;
+  color: #e5e7eb;
+}
+
+.btn-action {
+  padding: 6px 14px;
+  border-radius: 6px;
+  background: #0d6efd;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-action:hover {
+  background: #0b5ed7;
+}
+
+.movie-table img {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+body {
+  background: radial-gradient(
+    circle at top,
+    #1f2937 0%,
+    #111827 45%,
+    #0b1220 100%
+  );
+    
+  color: #e5e7eb;
+  min-height: 100vh;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  justify-items: center;
+  justify-content: center;
+}
+
+/* AYRI YAZILMALI */
+.movie-card {
+  background: #0f172a;
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* Film kartı */
+.movie-card {
+  background: #0f172a;           
+   position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  cursor: pointer;
+}
+
+/* Hover efekti  */
+.movie-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.55);
+}
+
+.movie-card img {
+  width: 100%;
+  height: 280px;                 /* güncelleme kısmındaki görsellerin boyutunu değişme */
+  object-fit: cover;             /* ORANI BOZMA */
+  display: block;
+}
+
+/* Edit Movie - Mevcut görsel */
+
+.movie-title {
+  font-size: 15px;
+  margin: 0;           
+  padding: 0;
+  font-weight: 600;
+  text-align: left;
+  color: #f8fafc;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.85),
+    rgba(0,0,0,0.3)
+  );
+}
+
+
+
+.movie-genre {
+  margin-top: 4px;
+  font-size: 12.5px;
+  color: #cfd3d8;
+  text-align: left; 
+}
+
+.movie-info {
+  padding: 14px 18px;   /* soldan biraz içeride */
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.15)
+  );
+}
+
+
+.file-input-custom {
+    border: 2px dashed #0d6efd;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.file-input-custom:hover {
+    background-color: #f0f6ff;
+}
+
+
+/* PUAN BADGE */
+.movie-rating {
+  position: absolute;
+  top: 10px;
+  right: 11px; 
+
+  background: rgba(0,0,0,0.75);
+  color: #facc15;              /* sarı yıldız */
+  font-size: 13px;
+  font-weight: 600;
+
+  padding: 4px 8px;
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  backdrop-filter: blur(4px);  
+}
+.movie-card:hover .movie-rating {
+  transform: scale(1.1);
+}
+
+/* Film listesi alt bilgilendirme linki */
+.film-info-link {
+  background: transparent !important;
+  color: #cbd5e1 !important;   
+  border: none;
+  box-shadow: none;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Hover */
+.film-info-link:hover {
+  color: #ffffff !important;
+  text-decoration: underline;
+  background: transparent !important;
+}
+
+.card label {
+  color: #111827 !important;  
+}
+.file-input-custom {
+  border: 2px dashed #3b82f6;
+  padding: 10px;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.05);
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.file-input-custom:hover {
+  background: rgba(59,130,246,0.1);
+}
+
+
+
+.preview-title {
+  font-size: 13px;
+  color: #475569;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+/* Film Güncelle sayfası */
+.edit-page {
+  min-height: 100vh;
+  background: radial-gradient(
+    circle at top,
+    #e5ebf3 0%,
+    #d8e0ec 60%,
+    #cfd8e6 100%
+  );
+}
+.section-header {
+  visibility: hidden;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.action-card {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  border-radius: 14px;
+  padding: 22px 28px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  text-align: center;
+
+  max-width: 520px;   /* dar */
+  margin: 24px auto;  /* ortala */
+}
+
+/* SUCCESS ALERT  */
+.alert-wrapper {
+  width: 100%;
+  margin-top: 12px;
+}
+
+.alert-wrapper .success-alert {
+  width: 100%;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #b7e4c7;
+
+  padding: 12px 52px;
+  border-radius: 6px;
+
+  text-align: center;
+  font-weight: 600;
+
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Çarpı */
+.alert-wrapper .alert-close {
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.7;
+  transition: 0.15s ease;
+}
+
+.alert-wrapper .alert-close:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.2);
+}
+.alert {
+	display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.alert .btn-close {
+  margin-top: 0;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+}
+.edit-page .container {
+  padding-top: 0px;
+}
+
+.home-content {
+  padding-top: 80px;   /* İŞLEM SEÇİN KARTININ YUKSEKLİĞİ */
+}
+
+.empty-state {
+  width: 100%;
+  min-height: 260px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  color: #cbd5e1;
+  font-size: 16px;
+  font-weight: 500;
+}
+/*  Film listesi alt bilgi yukarı alma */
+.film-list-info {
+  text-align: center;
+  margin-top: 3px;   /*  Eskiden 30px idi */
+}
+
+
+.film-info-link {
+  font-size: 16px;
+  padding: 8px 16px;
+}
+.watch-link {
+  display: flex;
+  flex-direction: column;
+}
+
+.watch-input {
+  max-width: 420px;
+  width: 100%;
+}
+
+
+
