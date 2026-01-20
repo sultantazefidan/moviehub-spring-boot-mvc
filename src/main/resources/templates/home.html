@@ -1,0 +1,699 @@
+<head>
+  <meta charset="UTF-8">
+  <title>MovieHub</title>
+
+  <!-- Bootstrap 5  -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+  <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+
+
+<body>
+
+<!-- Header -->
+<div class="app-header">
+  <div class="header-center">
+    <div class="app-title">
+      <a href="/" class="app-logo">🎬 MovieHub</a>
+      <div class="app-subtitle">Filmlerini takip et, düzenle ve yönet</div>
+    </div>
+
+    <div class="app-user">
+      <span>👋 Hoş geldiniz, <strong th:text="${username}">admin</strong></span>
+      <a th:href="@{/logout}" class="logout-btn">Çıkış Yap</a>
+    </div>
+  </div>
+</div>
+
+<!--  Alert wrapper -->
+<div class="alert-wrapper">
+
+ <!-- Başarı -->
+<div th:if="${successMessage}"
+     id="successAlert"
+     style="
+       width: 730px;
+       max-width: 95%;
+       position: fixed;
+       top: 230px;
+       left: 50%;
+       transform: translateX(-50%);
+       background-color: #d4edda;
+       color: #155724;
+       padding: 3px 18px;
+       text-align: center;
+       font-weight: 500;
+       font-size: 14px;
+       box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+       z-index: 9999;
+       border-radius: 6px;
+     ">
+
+  <span th:text="${successMessage}"></span>
+
+  <!-- Çarpı -->
+  <span
+    onclick="this.parentElement.style.display='none'"
+    style="
+      position: absolute;
+      right: 10px; 
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 14px;
+      opacity: 0.7;
+    "
+    onmouseover="this.style.opacity='1'"
+    onmouseout="this.style.opacity='0.7'"
+  >✖</span>
+
+</div>
+
+
+
+  <!-- Hata -->
+  <div th:if="${error}"
+       id="errorAlert"
+       style="
+         width: 100%;
+         background-color: #f8d7da;
+         color: #842029;
+         padding: 12px 48px;
+         text-align: center;
+         font-weight: 600;
+         position: relative;
+         box-sizing: border-box;
+         margin-top: 6px;
+       ">
+
+    <span th:text="${error}"></span>
+
+    <!-- Çarpı -->
+    <span
+      onclick="this.parentElement.style.display='none'"
+      style="
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        font-size: 18px;
+        opacity: 0.7;
+      "
+      onmouseover="this.style.opacity='1'"
+      onmouseout="this.style.opacity='0.7'"
+    >✖</span>
+
+  </div>
+
+</div>
+
+
+
+  
+  <!-- Kullanıcı yonlednırme -->
+<div class="home-content">
+
+  <div class="card action-card">
+    <p class="action-title">Lütfen yapmak istediğiniz işlemi seçin</p>
+
+    <div class="action-row">
+      <select id="actionSelect">
+        <option value="">İşlem seçin</option>
+        <option value="filmEkle">🎬 Film Ekle</option>
+        <option value="filmAra">🔍 Film Ara</option>
+        <option value="filmListe">📋 Film Listesi</option>
+      </select>
+
+      <button type="button" onclick="goAction()" class="btn-action">
+        Seç
+      </button>
+    </div>
+  </div>
+
+</div>
+
+  
+  
+  
+  <!-- Section header -->
+  <div class="section-header" onclick="toggleSection('filmEkle')">
+      ➕ Film Ekle
+  </div>
+
+  <!-- Section content -->
+  <div id="filmEkle" class="section-content" style="display:none;">
+
+
+    <!-- Form başlangıç -->
+    <div class="form-wrapper">
+    <form th:action="@{/add}"
+          th:object="${movie}"
+          method="post"
+          enctype="multipart/form-data">
+          
+ <div class="form-grid">
+ 
+        <div>
+            <label>Film Adı:</label>
+            <input type="text" th:field="*{title}" required>
+            <div th:if="${#fields.hasErrors('title')}"
+                 th:errors="*{title}"
+                 style="color:red"></div>
+        </div>
+
+        <div class="form-group full">
+        <label>Açıklama:</label>
+        <textarea th:field="*{description}" rows="4"
+            placeholder="Film konusu..."></textarea>
+        </div>
+
+      <div class="form-group full">
+  <label class="form-label genre-title">Türler:</label>
+
+  <div class="genre-grid">
+
+    <!-- Sol sütuun -->
+    <div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="genres" value="Bilim Kurgu"
+               th:checked="${movie.genres != null and movie.genres.contains('Bilim Kurgu')}">
+        <label class="form-check-label">Bilim Kurgu</label>
+      </div>
+
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="genres" value="Aksiyon"
+               th:checked="${movie.genres != null and movie.genres.contains('Aksiyon')}">
+        <label class="form-check-label">Aksiyon</label>
+      </div>
+
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="genres" value="Gerilim"
+               th:checked="${movie.genres != null and movie.genres.contains('Gerilim')}">
+        <label class="form-check-label">Gerilim</label>
+      </div>
+
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="genres" value="Drama"
+               th:checked="${movie.genres != null and movie.genres.contains('Drama')}">
+        <label class="form-check-label">Drama</label>
+      </div>
+    </div>
+
+    <!-- Sağ sutun -->
+    <div>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="genres" value="Macera"
+               th:checked="${movie.genres != null and movie.genres.contains('Macera')}">
+        <label class="form-check-label">Macera</label>
+      </div>
+
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="genres" value="Romantik"
+               th:checked="${movie.genres != null and movie.genres.contains('Romantik')}">
+        <label class="form-check-label">Romantik</label>
+      </div>
+
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="genres" value="Fantastik"
+               th:checked="${movie.genres != null and movie.genres.contains('Fantastik')}">
+        <label class="form-check-label">Fantastik</label>
+      </div>
+
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" name="genres" value="Tarihi"
+               th:checked="${movie.genres != null and movie.genres.contains('Tarihi')}">
+        <label class="form-check-label">Tarihi</label>
+      </div>
+    </div>
+
+  </div>
+
+  <!--  Diğer -->
+  <div class="form-check form-switch mt-3">
+    <input class="form-check-input" type="checkbox"
+           id="otherGenreCheck"
+           name="otherSelected" 
+           th:checked="${movie.otherGenre != null}"
+           onclick="toggleOtherGenreAdd()">
+    <label class="form-check-label">Diğer</label>
+  </div>
+
+  <input type="text"
+         id="otherGenreInput"
+         name="customGenre"
+         class="form-control form-control-sm mt-2"
+         placeholder="örn: Çocuk, Komedi"
+         th:value="${movie.otherGenre}"
+         th:style="${movie.otherGenre != null} ? 'display:block' : 'display:none'">
+</div>
+
+
+       <div class="form-group small">
+    <label>Yayın Yılı:</label>
+    <input type="number" th:field="*{releaseYear}" min="1900" max="2100" placeholder="Örn: 2010">
+    <div th:if="${#fields.hasErrors('releaseYear')}"
+         th:errors="*{releaseYear}"
+         style="color:red"></div>
+    </div>
+
+      <div class="form-group small">
+      <label>Süre (dk):</label>
+      <input type="number" th:field="*{duration}" min="1" placeholder="Örn: 136">
+      </div>
+      
+ <div class="form-group full watch-link">
+  <label>İzleme Linki:</label>
+  <input type="url"
+         class="watch-input"
+         th:field="*{watchUrl}"
+         placeholder="https://...">
+</div>
+
+      
+
+        <div class="form-group full">
+           <label>Kısa Not:</label>
+          <textarea th:field="*{note}" rows="3"
+            placeholder="Film hakkındaki yorumun..."></textarea>
+          </div>
+
+<div class="form-group watched-row">
+  <div class="form-check form-switch">
+    <input class="form-check-input"
+           type="checkbox"
+           th:field="*{watched}"
+           id="watchedCheckbox"
+           onchange="toggleRating()">
+
+    <label class="form-check-label fw-semibold" for="watchedCheckbox">
+      İzledim
+    </label>
+  </div>
+
+  <div id="ratingDiv" class="rating-inline" style="display:none;">
+    <label class="fw-semibold">Puan (1–5)</label>
+    <input type="number" th:field="*{rating}" min="1" max="5">
+    <div th:if="${#fields.hasErrors('rating')}"
+         th:errors="*{rating}"
+         style="color:red"></div>
+  </div>
+</div>
+
+
+<div class="form-group full">
+  <label class="form-label fw-semibold">🎞️ Film Görseli</label>
+
+  <!-- Gizli gerçek input -->
+  <input type="file"
+         id="imageFile"
+         name="imageFile"
+         accept="image/*"
+         style="display:none;">
+
+  <!-- Görünen satır -->
+  <div class="file-upload-row">
+    <button type="button"
+            class="btn btn-primary btn-sm"
+            onclick="document.getElementById('imageFile').click()">
+      📁 Dosya Seç
+    </button>
+
+    <span class="file-hint" id="fileHint">Dosya seçilmedi</span>
+  </div>
+
+  <small class="text-muted d-block mt-1">
+    JPG, PNG formatları önerilir
+  </small>
+
+  <!--  Seçilen görseli özileme -->
+  <div id="selectedPreview" style="display:none; margin-top:12px;">
+    <div class="fw-semibold mb-1">Seçilen Görsel</div>
+    <img id="previewImg"
+         style="max-width:180px;
+                border-radius:12px;
+                box-shadow:0 8px 20px rgba(0,0,0,.35);">
+  </div>
+</div>
+
+
+
+<div class="form-group full submit-row">
+  <button type="submit" class="btn-add">
+    ➕ Film Bilgisi Ekle
+  </button>
+</div>
+  
+</div>
+    </form>
+</div>
+  </div>
+
+
+
+
+
+
+
+  <!-- Section header -->
+  <div class="section-header" onclick="toggleSection('filmAra')">
+      🔍 Film Ara
+  </div>
+
+  <!-- Section content -->
+ <div id="filmAra"
+     class="section-content"
+     th:style="${openSection == 'filmAra'} ? 'display:block' : 'display:none'">
+
+
+
+    <form th:action="@{/search}" method="get" class="film-ara-form">
+
+
+        <div>
+            <label>Film Adı ile Ara:</label><br>
+            <input type="text"
+       name="title"
+       placeholder="Örn: Inception"
+       th:value="${searchTitle}">
+
+        </div>
+         
+        <br>
+        
+                <div class="search-actions">
+    <button type="submit">🔍 Ara</button>
+    <a th:href="@{/}">🔄 Tümünü Göster</a>
+</div>
+           <br>
+
+        <label>Türlerine Göre Filmler:</label><br><br>
+
+        <div class="genre-box">
+
+            <input type="checkbox" id="g2" name="genres" value="Aksiyon">
+            <label for="g2" class="genre-pill">⚔️ Aksiyon</label>
+            
+            <input type="checkbox" id="g15" name="genres" value="Animasyon">
+            <label for="g15" class="genre-pill">🎨 Animasyon</label>
+            
+            <input type="checkbox" id="g16" name="genres" value="Belgesel">
+             <label for="g16" class="genre-pill">🎥 Belgesel</label>
+
+            <input type="checkbox" id="g1" name="genres" value="Bilim Kurgu">
+            <label for="g1" class="genre-pill">🚀 Bilim Kurgu</label>
+            
+            <input type="checkbox" id="g12" name="genres" value="Çocuk">
+            <label for="g12" class="genre-pill">🧒 Çocuk</label>
+            
+            <input type="checkbox" id="g3" name="genres" value="Drama">
+            <label for="g3" class="genre-pill">🎭 Dram</label>
+
+            <input type="checkbox" id="g8" name="genres" value="Fantastik">
+            <label for="g8" class="genre-pill">🧙 Fantastik</label>
+
+            <input type="checkbox" id="g5" name="genres" value="Gerilim">
+            <label for="g5" class="genre-pill">😱 Gerilim</label>
+            
+             <input type="checkbox" id="g16" name="genres" value="Gizem">
+             <label for="g16" class="genre-pill">🕵️ Gizem</label>
+            
+            <input type="checkbox" id="g13" name="genres" value="Komedi">
+            <label for="g13" class="genre-pill">😂 Komedi</label>
+            
+            <input type="checkbox" id="g15" name="genres" value="Korku">
+            <label for="g15" class="genre-pill">👻 Korku</label>
+
+            <input type="checkbox" id="g4" name="genres" value="Macera">
+            <label for="g4" class="genre-pill">🧗 Macera</label>
+
+            <input type="checkbox" id="g10" name="genres" value="Polisiye">
+            <label for="g10" class="genre-pill">🕵️ Polisiye</label>
+            
+            <input type="checkbox" id="g17" name="genres" value="Psikolojik">
+            <label for="g17" class="genre-pill">🧠 Psikolojik</label>
+            
+
+            <input type="checkbox" id="g6" name="genres" value="Romantik">
+            <label for="g6" class="genre-pill">❤️ Romantik</label>
+
+            <input type="checkbox" id="g9" name="genres" value="Savaş">
+            <label for="g9" class="genre-pill">⚔️ Savaş</label>
+
+            <input type="checkbox" id="g11" name="genres" value="Suç">
+            <label for="g11" class="genre-pill">🚔 Suç</label>
+
+            <input type="checkbox" id="g7" name="genres" value="Tarihi">
+            <label for="g7" class="genre-pill">🏛️ Tarihi</label>
+
+        </div>
+
+     
+    </form>
+
+  </div>
+
+
+
+
+<!-- Section header -->
+<div class="section-header" onclick="toggleSection('filmListe')">
+  🎬 Film Listesi
+</div>
+
+
+<!-- Section content -->
+<div id="filmListe"
+     class="section-content"
+    th:style="${openList != null and openList} ? 'display:block' : 'display:none'">
+
+
+  <!-- Hİiç film yoksa-->
+<div th:if="${#lists.isEmpty(movies)}" class="empty-state">
+  <p>Henüz film eklenmedi.</p>
+</div>
+
+<!-- film kartları (sadece film varsa) -->
+<div class="movie-grid" th:if="${!#lists.isEmpty(movies)}">
+
+  <div class="movie-card" th:each="m : ${movies}">
+
+    
+    <!-- poster (izleme link varsa tıklanabılır) -->
+<a th:if="${m.watchUrl != null}"
+   th:href="${m.watchUrl}"
+   target="_blank">
+
+  <img th:if="${m.imageUrl != null}"
+       th:src="@{${m.imageUrl}}"
+       alt="poster"
+       class="movie-poster">
+</a>
+
+<!-- poster (izleme linki yoksa normal) -->
+<img th:if="${m.watchUrl == null and m.imageUrl != null}"
+     th:src="@{${m.imageUrl}}"
+     alt="poster"
+     class="movie-poster">
+
+
+    <!-- Poster yoksa-->
+    <img th:if="${m.imageUrl == null}"
+         th:src="@{/images/no-poster.png}"
+         alt="poster"
+         class="movie-poster">
+
+    <!-- ⭐ puan -->
+    <div class="movie-rating" th:if="${m.rating != null}">
+      ⭐ <span th:text="${m.rating}"></span>
+    </div>
+
+    <!-- Alt bilgi -->
+    <div class="movie-info">
+      <div class="movie-title" th:text="${m.title}"></div>
+      <div class="movie-genre"
+           th:text="${#strings.listJoin(m.genres, ', ')}"></div>
+    </div>
+
+  </div>
+</div>
+
+</div>
+
+<div id="filmListInfo"
+     th:if="${openSection == 'filmListe'}"
+     class="film-list-info">
+  <a href="/manage" class="btn btn-primary film-info-link">
+    ✏️ Film bilgilerini görüntülemek ve düzenleme yapmak için tıklayın
+  </a>
+</div>
+
+
+
+
+
+<script>
+
+function closeAlert() {
+	  const box = document.getElementById("alertBox");
+	  if (box) box.style.display = "none";
+	}
+
+	function closeError() {
+	  const box = document.getElementById("errorBox");
+	  if (box) box.style.display = "none";
+	}
+document.addEventListener("DOMContentLoaded", function () {
+    const section = /*[[${openSection}]]*/ null;
+    if (section) {
+      document.getElementById(section).style.display = "block";
+    }
+  });
+
+     function toggleOtherGenreAdd() {
+	  const check = document.getElementById("otherGenreCheck");
+	  const input = document.getElementById("otherGenreInput");
+
+	  if (check.checked) {
+	    input.style.display = "block";
+	    input.focus();
+	  } else {
+	    input.style.display = "none";
+	    input.value = "";
+	  }
+     }
+
+
+  const checkbox = document.getElementById("watchedCheckbox");
+  const ratingDiv = document.getElementById("ratingDiv");
+
+  if (checkbox && ratingDiv) {
+    checkbox.addEventListener("change", function () {
+      ratingDiv.style.display = this.checked ? "block" : "none";
+    });
+  }
+
+
+  function hideInfoBox() {
+    const box = document.getElementById("infoBox");
+    if (box) box.style.display = "none";
+    sessionStorage.setItem("hideInfoBox", "true");
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    if (sessionStorage.getItem("hideInfoBox") === "true") {
+      const box = document.getElementById("infoBox");
+      if (box) box.style.display = "none";
+    }
+  });
+
+  document.querySelectorAll('.genre-box input[type="checkbox"]')
+    .forEach(cb => {
+      cb.addEventListener('change', () => {
+        cb.closest('form').submit();
+      });
+    });
+
+  function toggleSection(id) {
+	  const content = document.getElementById(id);
+	  if (!content) return;
+
+	  const infoBox = document.getElementById("infoBox");
+	  const filmInfo = document.getElementById("filmListInfo");
+
+	  const isOpen = content.style.display === "block";
+
+	  document.querySelectorAll(".section-content")
+	    .forEach(el => el.style.display = "none");
+
+	  document.querySelectorAll(".section-header")
+	    .forEach(h => h.classList.remove("active"));
+
+	  if (infoBox) infoBox.style.display = "none";
+	  if (filmInfo) filmInfo.style.display = "none";
+
+	  if (!isOpen) {
+	    content.style.display = "block";
+
+	    if (id === "filmListe") {
+	      if (infoBox) infoBox.style.display = "block";
+	      if (filmInfo) filmInfo.style.display = "block";
+	    }
+	  }
+	}
+
+
+  function goAction() {
+	  const action = document.getElementById("actionSelect").value;
+	  if (!action) return;
+
+	  document.querySelectorAll(".section-content")
+	    .forEach(el => el.style.display = "none");
+
+	  const infoBox = document.getElementById("infoBox");
+	  const filmInfo = document.getElementById("filmListInfo");
+
+	  if (infoBox) infoBox.style.display = "none";
+	  if (filmInfo) filmInfo.style.display = "none";
+
+	  const target = document.getElementById(action);
+	  if (target) {
+	    target.style.display = "block";
+	    target.scrollIntoView({ behavior: "smooth" });
+
+	    if (action === "filmListe") {
+	      if (infoBox) infoBox.style.display = "block";
+	      if (filmInfo) filmInfo.style.display = "block";
+	    }
+	  }
+	}
+    
+
+  document.getElementById("imageFile").addEventListener("change", function (e) {
+    const file = e.target.files[0];
+    const previewBox = document.getElementById("selectedPreview");
+    const previewImg = document.getElementById("previewImg");
+    const hint = document.querySelector(".file-hint");
+
+    if (!file) {
+      previewBox.style.display = "none";
+      previewImg.src = "";
+      hint.textContent = "Dosya seçilmedi";
+      return;
+    }
+
+    // sadece resim kontrolü
+    if (!file.type.startsWith("image/")) {
+      alert("Lütfen bir resim dosyası seçin");
+      e.target.value = "";
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function () {
+      previewImg.src = reader.result;
+      previewBox.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+
+    hint.textContent = file.name;
+  });
+  
+  setTimeout(() => {
+	    const alert = document.getElementById("successAlert");
+	    if (alert) {
+	      alert.style.opacity = "0";
+	      setTimeout(() => alert.style.display = "none", 300);
+	    }
+	  }, 3000); // ⏱️ 3 saniye
+
+	  
+</script>
+
+
+
+</body>
+
+</html>
