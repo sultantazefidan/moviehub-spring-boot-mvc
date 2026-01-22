@@ -126,6 +126,18 @@ class MovieServiceImplTest {
         ));
     }
 
+     //Zorunlu alan olan title boş ise film kaydedilmemeli  
+    @Test
+    void saveMovie_withoutTitle_shouldFail() {
+        Movie movie = new Movie();
+        movie.setReleaseYear(2020);
+        movie.setWatched(false);
+
+        assertThrows(Exception.class, () -> {
+            movieService.saveMovie(movie);
+        });
+    }
 
 
 }
+
