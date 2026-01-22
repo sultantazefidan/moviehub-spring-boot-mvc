@@ -141,7 +141,7 @@ moviehub-spring-boot-mvc
   test stratejileri ve kullanıcı deneyimi yaklaşımlarını
   uygulamalı olarak göstermek amacıyla geliştirilmiştir.
 - Kullanıcı kayıt (Register) özelliği, sonraki sürümler için planlanmıştır.
-- - Test süreçlerinin başarıyla tamamlandığını göstermek amacıyla,
+- Test süreçlerinin başarıyla tamamlandığını göstermek amacıyla,
   tüm test çıktıları yerine **örnek olarak seçilen üç test türüne**
   ait ekran görüntüleri paylaşılmıştır.
   Bu kapsamda **Integration Test**, **User Interface (UI) Test**
